@@ -1,5 +1,3 @@
-#include "ConvNet.h"
-#include <opencv2/opencv.hpp>
 #include <iostream>
 
 int main() {
@@ -14,7 +12,6 @@ int main() {
                         "/home/mzingerenko/Desktop/LecturesProject_Example/data/fc_weights.txt",
                         "/home/mzingerenko/Desktop/LecturesProject_Example/data/fc_biases.txt");
 
-    cv::Mat img = cv::imread("/home/mzingerenko/Desktop/LecturesProject_Example/data/mnist_img3.png", cv::IMREAD_GRAYSCALE);
 
     std::vector<float> input = network.preprocessImage(img);
     std::vector<float> output;

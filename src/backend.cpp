@@ -1,7 +1,5 @@
 #include <cpprest/http_listener.h>
 #include <cpprest/json.h>
-#include <opencv2/opencv.hpp>
-#include "ConvNet.h"
 #include "ProcessNumbers.h"
 #include <iostream>
 #include <fstream>

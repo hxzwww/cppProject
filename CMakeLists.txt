@@ -48,7 +48,7 @@ endif()
 
 # Define source files for preprocessing tests
 set(TEST_FILES
-    src/Preprocessing.cpp
+    src/ProcessNumbers.cpp
     src/PreprocessingTest.cpp)
 
 # Add preprocessing tests
