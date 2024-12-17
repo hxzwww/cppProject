@@ -1,36 +1,23 @@
 #include <gtest/gtest.h>
 #include "Preprocessing.h"
+#include "ProcessNumbers.h"
 
-// Test grayscale conversion
-TEST(PreprocessingTest, GrayscaleConversion) {
-    cv::Mat colorImg(100, 100, CV_8UC3, cv::Scalar(255, 255, 255)); // White image
-    cv::Mat grayImg = Preprocessor::toGrayscale(colorImg);
+using vt = std::vector<int>;
 
-    ASSERT_EQ(grayImg.channels(), 1);
-    ASSERT_EQ(grayImg.rows, colorImg.rows);
-    ASSERT_EQ(grayImg.cols, colorImg.cols);
-    ASSERT_EQ(grayImg.at<uchar>(0, 0), 255); // Check pixel value
+TEST(PreprocessingTest, AbobusTest) {
+    vt array{1, 2, 3, 4, 5};   
+    const vt array_copy = array ;   
+
+    sort_array(array);
+    ASSERT_EQ(array, array_copy);
 }
 
-// Test normalization
-TEST(PreprocessingTest, Normalization) {
-    cv::Mat grayImg = cv::Mat::ones(100, 100, CV_8UC1) * 128; // Mid-gray image
-    cv::Mat normalizedImg = Preprocessor::normalize(grayImg);
+TEST(PreprocessingTest, AbobusTest2) {
+    vt array2{1, 2, 9, 4, 5};   
+    const vt array_copy2{1, 2, 4, 5, 9};
 
-    ASSERT_EQ(normalizedImg.rows, grayImg.rows);
-    ASSERT_EQ(normalizedImg.cols, grayImg.cols);
-    ASSERT_NEAR(normalizedImg.at<float>(0, 0), 128.0 / 255.0, 1e-5);
+    sort_array(array2);
+
+    ASSERT_EQ(array2, array_copy2);
 }
 
-// Test Sobel filter
-TEST(PreprocessingTest, SobelFilter) {
-    cv::Mat grayImg = cv::Mat::zeros(100, 100, CV_8UC1);
-    grayImg.at<uchar>(50, 50) = 255;       // Bright pixel
-    grayImg.at<uchar>(50, 51) = 255;       // Neighboring bright pixel for gradient
-    cv::Mat normalized = Preprocessor::normalize(grayImg);
-    cv::Mat gradImg = Preprocessor::applySobel(normalized);
-
-    ASSERT_EQ(gradImg.rows, grayImg.rows);
-    ASSERT_EQ(gradImg.cols, grayImg.cols);
-    ASSERT_GT(gradImg.at<float>(50, 50), 0); // Check that Sobel detects the edge
-}
