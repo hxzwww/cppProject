@@ -17,9 +17,6 @@ if(NOT BUILD_TESTS_ONLY)
   find_package(OpenSSL REQUIRED)
 endif()
 
-# OpenCV package
-find_package(OpenCV REQUIRED)
-include_directories(${OpenCV_INCLUDE_DIRS})
 
 # Intel TBB package
 find_package(TBB REQUIRED)
@@ -61,7 +58,6 @@ if(NOT BUILD_TESTS_ONLY)
   # Link libraries to the main executable
   target_link_libraries(${PROJECT_NAME} PRIVATE 
       ${CUDA_LIBRARIES} 
-      ${OpenCV_LIBS} 
       cpprestsdk::cpprest 
       OpenSSL::SSL 
       OpenSSL::Crypto 
@@ -72,7 +68,6 @@ endif()
 
 # Link libraries to the test executable
 target_link_libraries(PreprocessingTest PRIVATE 
-    ${OpenCV_LIBS} 
     ${GTEST_LIBRARIES} 
     TBB::tbb  # Add TBB for preprocessing
     gtest_main 
@@ -84,7 +79,6 @@ if(NOT BUILD_TESTS_ONLY)
   include_directories(${CUDA_INCLUDE_DIRS})
 endif()
 
-include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(include)
 
 # Enable testing
