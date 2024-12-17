@@ -21,11 +21,15 @@ jobs:
           sudo apt update
           sudo apt install -y build-essential cmake libopencv-dev libgtest-dev libtbb-dev
 
-      - name: Build and run tests
+      - name: Build tests
         run: |
           mkdir build
           cd build
           cmake .. -DBUILD_TESTS_ONLY=ON
-          make
-          ctest --output-on-failure
+          make -j 4
+
+      - name: Run tests
+        run: |
+          cd build
+          ./PreprocessingTest
 
