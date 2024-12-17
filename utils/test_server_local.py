@@ -1,14 +1,33 @@
 import requests
+import wget
+import json
 
 # Server URL
-url = "http://localhost:8080/predict"
+url = "http://localhost:80"
 
-# Image file to send
-image_path = "/home/mzingerenko/Desktop/LecturesProject_Example/data/mnist_img3.png"
-with open(image_path, "rb") as img_file:
-    headers = {"Content-Type": "image/jpeg"}
-    response = requests.post(url, headers=headers, data=img_file)
+numbers = [3, 1, 7, 4, 6, 1, 8]
 
-# Print the server response
+data = '{"numbers": ' + f'{numbers}}}'
+
+response = requests.post(url + '/upload', headers={"Content-Type": "application/json"}, data=data)
+
 print("Response Code:", response.status_code)
-print("Response JSON:", response.json())
+
+filename = response.json()['file']
+
+filename = filename[
+    filename.find('tmp') + 3 : -2
+]
+
+link = url + '/downloads' + filename
+
+
+name = wget.download(link)
+
+with open(name, 'r') as f:
+    data = json.load(f)
+
+server_sorted_nums = data['numbers']
+real_srted_nums = sorted(numbers)
+
+print('\nResult:', server_sorted_nums == real_srted_nums)
