@@ -11,14 +11,14 @@
         <input type="file" name="image" id="arrayInput" accept="*/*">
         <button type="submit">Upload and Process</button>
     </form>
-    <a id="outputFile" href="files/example.pdf" download="example.txt">Processed File will appear here</a>
+    <a id="outputFile" href="files/example.pdf" download="result.txt">Processed File will appear here</a>
 
     <script>
         document.getElementById('uploadForm').onsubmit = async function(e) {
 
             // Avoid page reloading
             e.preventDefault();
-            var addr = "http://192.168.50.22:80";
+            var addr = "http://localhost:80";
 
             const formData = new FormData();
             const fileInput = document.getElementById('arrayInput');

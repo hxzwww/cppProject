@@ -3,4 +3,4 @@
 #include <cstdio>
 #include <vector>
 
-void process_numbers(FILE* c_file, const std::vector<int>& array);
+void process_numbers(FILE* c_file, std::vector<int>& array);
