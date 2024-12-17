@@ -8,8 +8,7 @@ else()
   project(ConvNetServer LANGUAGES CXX)
 endif()
 
-# Enable C++11 standard
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if(NOT BUILD_TESTS_ONLY)
@@ -41,7 +40,7 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 if(NOT BUILD_TESTS_ONLY)
   # Define source files for backend code
   set(SRC_FILES
-      src/backend.cpp)
+      src/backend.cpp src/ProcessNumbers.cpp)
 
   # Add the main executable
   add_executable(${PROJECT_NAME} ${SRC_FILES})
