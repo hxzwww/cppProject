@@ -6,8 +6,8 @@
 __global__ void merge_kernel(int *input, int *output, int size, int width) {
     int tid = blockIdx.x * blockDim.x + threadIdx.x;
     int left = tid * (2 * width);
-    int mid = min(left + width, size);
-    int right = min(left + 2 * width, size);
+    int mid = std::min(left + width, size);
+    int right = std::min(left + 2 * width, size);
 
     int i = left, j = mid, k = left;
 
@@ -52,4 +52,3 @@ void merge_sort_cuda(int *data, int size) {
     cudaFree(d_input);
     cudaFree(d_output);
 }
-

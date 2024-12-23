@@ -1,10 +1,6 @@
 #include <ProcessNumbers.h>
-#include <tbb/tbb.h>
 #include "MergeSort.h"
-
-void sort_array(std::vector<int>& array) {
-  tbb::parallel_sort(array.begin(), array.end());
-}
+#include <TbbSort.h>
 
 void process_numbers(FILE* c_file, std::vector<int>& array, int onCuda) {
 

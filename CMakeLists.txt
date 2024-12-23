@@ -58,9 +58,8 @@ endif()
 
 # Define source files for preprocessing tests
 set(TEST_FILES
-    src/ProcessNumbers.cpp
+    src/TbbSort.cpp
     src/SortTest.cpp
-    src/MergeSort.cpp
     )
 
 # Add preprocessing tests

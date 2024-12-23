@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "ProcessNumbers.h"
+#include "TbbSort.h"
 
 using vt = std::vector<int>;
 
