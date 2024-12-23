@@ -1,5 +1,5 @@
 # docker/Dockerfile.builder
-FROM nvidia/cuda:11.8.0-devel-ubuntu20.04
+FROM nvidia/cuda:12.6.3-devel-ubuntu24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 # Install dependencies

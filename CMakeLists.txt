@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.25.2 FATAL_ERROR)
+
 
 option(BUILD_TESTS_ONLY "Build only tests" OFF)
 
@@ -10,6 +11,8 @@ endif()
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CUDA_STANDARD 20)
+set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 
 if(NOT BUILD_TESTS_ONLY)
   find_package(CUDA REQUIRED)
