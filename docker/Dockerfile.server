@@ -1,10 +1,10 @@
 # Dockerfile.server
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 # Install runtime dependencies
 RUN apt update && \
-    apt install -y vim lsof libssl-dev libcpprest-dev libtbb-dev python3 && \
+    apt install -y vim lsof libc6 libssl-dev libcpprest-dev libtbb-dev python3 && \
     apt clean
 
 # Set working directory
