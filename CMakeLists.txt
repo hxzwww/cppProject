@@ -37,7 +37,17 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 if(NOT BUILD_TESTS_ONLY)
   # Define source files for backend code
   set(SRC_FILES
-      src/backend.cpp src/ProcessNumbers.cpp)
+	  src/backend.cpp 
+	  src/ProcessNumbers.cpp 
+	  src/MergeSort.cpp
+  )
+  set_source_files_properties(
+	src/ProcessNumbers.cpp 
+	src/backend.cpp 
+	src/MergeSort.cpp 
+	PROPERTIES LANGUAGE CUDA
+	)
+  
 
   # Add the main executable
   add_executable(${PROJECT_NAME} ${SRC_FILES})
@@ -46,7 +56,9 @@ endif()
 # Define source files for preprocessing tests
 set(TEST_FILES
     src/ProcessNumbers.cpp
-    src/SortTest.cpp)
+    src/SortTest.cpp
+    src/MergeSort.cpp
+    )
 
 # Add preprocessing tests
 add_executable(SortTest ${TEST_FILES})
