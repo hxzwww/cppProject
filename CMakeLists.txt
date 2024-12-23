@@ -3,9 +3,9 @@ cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 option(BUILD_TESTS_ONLY "Build only tests" OFF)
 
 if(NOT BUILD_TESTS_ONLY)
-  project(ConvNetServer LANGUAGES CXX CUDA)
+  project(SortServer LANGUAGES CXX CUDA)
 else()
-  project(ConvNetServer LANGUAGES CXX)
+  project(SortServer LANGUAGES CXX)
 endif()
 
 set(CMAKE_CXX_STANDARD 20)
@@ -46,10 +46,10 @@ endif()
 # Define source files for preprocessing tests
 set(TEST_FILES
     src/ProcessNumbers.cpp
-    src/PreprocessingTest.cpp)
+    src/SortTest.cpp)
 
 # Add preprocessing tests
-add_executable(PreprocessingTest ${TEST_FILES})
+add_executable(SortTest ${TEST_FILES})
 
 # Add subdirectory for src
 add_subdirectory(src)
@@ -67,7 +67,7 @@ if(NOT BUILD_TESTS_ONLY)
 endif()
 
 # Link libraries to the test executable
-target_link_libraries(PreprocessingTest PRIVATE 
+target_link_libraries(SortTest PRIVATE 
     ${GTEST_LIBRARIES} 
     TBB::tbb  # Add TBB for preprocessing
     gtest_main 
@@ -86,6 +86,6 @@ enable_testing()
 
 # Add test target
 add_test(
-    NAME PreprocessingTests
-    COMMAND PreprocessingTest
+    NAME SortTest
+    COMMAND SortTest
 )

@@ -3,7 +3,7 @@
 
 using vt = std::vector<int>;
 
-TEST(PreprocessingTest, AbobusTest) {
+TEST(SortTest, AbobaTest) {
     vt array{1, 2, 3, 4, 5};   
     const vt array_copy = array ;   
 
@@ -11,7 +11,7 @@ TEST(PreprocessingTest, AbobusTest) {
     ASSERT_EQ(array, array_copy);
 }
 
-TEST(PreprocessingTest, AbobusTest2) {
+TEST(SortTest, AbobaTest2) {
     vt array2{1, 2, 9, 4, 5};   
     const vt array_copy2{1, 2, 4, 5, 9};
 

@@ -8,7 +8,7 @@
     <h1>Upload an array in txt format:</h1>
     <h3>Example of txt file: { "numbers": [1, 2, 3, 4] }</h3>
     <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" name="image" id="arrayInput" accept="*/*">
+        <input type="file" id="arrayInput" accept="*/*">
         <button type="submit">Upload and Process</button>
     </form>
     <a id="outputFile" href="files/example.pdf" download="result.txt">Processed File will appear here</a>
@@ -16,26 +16,23 @@
     <script>
         document.getElementById('uploadForm').onsubmit = async function(e) {
 
-            // Avoid page reloading
             e.preventDefault();
             var addr = "http://localhost:80";
 
             const formData = new FormData();
             const fileInput = document.getElementById('arrayInput');
-            //formData.append('array', fileInput.files[0]);
             const file = fileInput.files[0];
             console.log("Start response sending...");
+            
 
             if (fileInput.files.length === 0) {
                 alert('Please select a file first.');
                 return;
             } 
-            // Создаем объект FileReader
             const reader = new FileReader();
 
-            // Определяем обработчик события после успешного чтения файла
             reader.onload = function(event) {
-                const fileContent = event.target.result;  // Содержимое файла
+                fileContent = event.target.result;
                 console.log(fileContent);
                 fetch(addr + '/upload', {
                     method: 'POST',
@@ -61,7 +58,6 @@
                 });
             };
 
-            // Читаем файл как текст
             reader.readAsText(file);
 
             console.log("Work with response done.");

@@ -11,13 +11,11 @@ RUN apt update && \
 WORKDIR /app
 
 # Copy the compiled binary from the builder container
-COPY --from=builder /app/build/ConvNetServer /app/
+COPY --from=builder /app/build/SortServer /app/
 
 
-COPY ../data /app/data/
-
-RUN chmod +x /app/ConvNetServer
+RUN chmod +x /app/SortServer
 
 EXPOSE 8080
 
-CMD ["./ConvNetServer"]
+CMD ["./SortServer"]

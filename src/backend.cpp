@@ -35,34 +35,22 @@ void handle_post(http_request request) {
       response.set_body(json::value::string(U("Невозможно обработать пустой запрос")));
       request.reply(response);
     } else {
-      // Извлекаем массив чисел из JSON
       if (request_data.has_field(U("numbers"))) {
         auto numbers_array = request_data[U("numbers")].as_array();
 
         std::vector<int> numbers;
         for (const auto& value : numbers_array) {
-          numbers.push_back(value.as_integer());  // Извлекаем числа и добавляем в вектор
+          numbers.push_back(value.as_integer());
         }
 
-        // Печатаем числа, чтобы убедиться, что они были правильно извлечены
-        std::cout << "Полученные числа: ";
-        for (int num : numbers) {
-          std::cout << num << " ";
-        }
-        std::cout << std::endl;
-
-        // Ответ с успешной обработкой
         json::value response_data;
         response_data[U("message")] = json::value::string(U("Запрос успешно обработан"));
 
-            // Шаблон имени файла для mkstemp
-        char filename[] = "/tmp/file_XXXXXX";  // 'X' будет заменено на случайные символы
+        char filename[] = "/tmp/file_XXXXXX";
 
-        // Создание уникального файла
         int fd = mkstemp(filename);
         fchmod(fd, 0777);
         if (fd == -1) {
-          std::cerr << "Ошибка при создании временного файла" << std::endl;
           response_data[U("err_mkstemp")] = json::value::string("Ошибка при создании временного файла");
           http_response response(status_codes::OK);
           response.set_body(response_data);
@@ -70,19 +58,17 @@ void handle_post(http_request request) {
           return;
         }
 
-        std::cout << "Уникальный временный файл: " << filename << std::endl;
-
-        // Запись в файл
         FILE* tmpf = fdopen(fd, "w+");
         if (tmpf == nullptr) {
-          std::cerr << "Ошибка при создании временного файла" << std::endl;
           response_data[U("fdopen_error")] = json::value::string("Ошибка при создании временного файла fopen");
           http_response response(status_codes::OK);
           response.set_body(response_data);
           request.reply(response);
           return;
         }
-        // TODO 
+        // if (request_data.has_field(U("onCuda"))) {
+        //   auto onCuda = request_data[U("onCuda")].as_integer();
+        // }
         process_numbers(tmpf, numbers);
         std::stringstream buffer;
         buffer << std::filesystem::read_symlink(
@@ -95,7 +81,6 @@ void handle_post(http_request request) {
         response.set_body(response_data);
         request.reply(response);
       } else {
-        std::cout << "Поле 'numbers' не найдено!" << std::endl;
         http_response response(status_codes::BadRequest);
         response.set_body(json::value::string(U("Не найдено поле 'numbers' в запросе")));
         request.reply(response);
@@ -106,12 +91,11 @@ void handle_post(http_request request) {
 }
 
 int main() {
-    // http_listener listener(U("http://localhost:8080/predict"));
     http_listener listener(U("http://0.0.0.0:8080/upload"));
 
 
     listener.support(methods::POST, handle_post);
-    listener.support(methods::OPTIONS, handle_options);  // Support CORS preflight requests
+    listener.support(methods::OPTIONS, handle_options);
 
     try {
         listener
@@ -120,13 +104,12 @@ int main() {
           .wait();
 
         std::string line;
-        std::getline(std::cin, line); // Keep the server running
+        std::getline(std::cin, line);
     } catch (const std::exception &e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
 
     while (true) {
-      // Sleep while not interrupted by signal
       pause();
     }
 

@@ -41,6 +41,5 @@ networks:
   app-network:
     driver: bridge
 
-# Define the named volume
 volumes:
   build_output:
