@@ -16,7 +16,6 @@ TEST(SortTest, AbobaTest2) {
     const vt array_copy2{1, 2, 4, 5, 9};
 
     sort_array(array2);
-
     ASSERT_EQ(array2, array_copy2);
 }
 

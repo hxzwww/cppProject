@@ -66,10 +66,11 @@ void handle_post(http_request request) {
           request.reply(response);
           return;
         }
-        // if (request_data.has_field(U("onCuda"))) {
-        //   auto onCuda = request_data[U("onCuda")].as_integer();
-        // }
-        process_numbers(tmpf, numbers);
+        int onCuda = 0;
+        if (request_data.has_field(U("onCuda"))) {
+          onCuda = request_data[U("onCuda")].as_integer();
+        }
+        process_numbers(tmpf, numbers, onCuda);
         std::stringstream buffer;
         buffer << std::filesystem::read_symlink(
              std::filesystem::path("/proc/self/fd") / std::to_string(fileno(tmpf))

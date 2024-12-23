@@ -6,10 +6,13 @@ void sort_array(std::vector<int>& array) {
   tbb::parallel_sort(array.begin(), array.end());
 }
 
-void process_numbers(FILE* c_file, std::vector<int>& array) {
+void process_numbers(FILE* c_file, std::vector<int>& array, int onCuda) {
 
-  //sort_array(array);
-  merge_sort_cuda(array.data(), array.size());
+  if (onCuda) {
+    merge_sort_cuda(array.data(), array.size());
+  } else {
+    sort_array(array);
+  }
 
   fprintf(c_file, "%s", "{\"numbers\": [");
   int x = array.size();
